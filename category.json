@@ -1,0 +1,17 @@
+[
+  {
+    "category_id": "1",
+    "category_name": "Apple",
+    "logo": "https://bit.ly/3F0x8m9"
+  },
+  {
+    "category_id": "2",
+    "category_name": "Samsung",
+    "logo": "https://bit.ly/3U4kKpx"
+  },
+  {
+    "category_id": "3",
+    "category_name": "Mi",
+    "logo": "https://bit.ly/3XsS9gk"
+  }
+]
