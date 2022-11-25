@@ -45,6 +45,12 @@ async function run() {
       const result = await usersCollections.insertOne(user);
       res.send(result);
     });
+
+    app.get("/users/seller", async (req, res) => {
+      const query = { role: "seller" };
+      const result = await usersCollections.find(query).toArray();
+      res.send(result);
+    });
   } finally {
   }
 }
