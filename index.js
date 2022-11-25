@@ -41,6 +41,14 @@ async function run() {
       res.send(result);
     });
 
+    // Get specific prodcuts for specific email
+    app.get("/dashboard/my-products", async (req, res) => {
+      const email = req.query.email;
+      const query = { seller_email: email };
+      const result = await productsCollections.find(query).toArray();
+      res.send(result);
+    });
+
     // Saved user email and name into database
     app.post("/users", async (req, res) => {
       const user = req.body;
@@ -70,10 +78,17 @@ async function run() {
       res.send(result);
     });
 
+    // Create an API endpoint for delete a seller
     app.delete("/users/seller/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await usersCollections.deleteOne(query);
+      res.send(result);
+    });
+
+    app.post("/add-products", async (req, res) => {
+      const product = req.body;
+      const result = await productsCollections.insertOne(product);
       res.send(result);
     });
   } finally {
