@@ -8,8 +8,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri =
-  "mongodb+srv://rakib:rakib@reusedproducts.qtwvoiy.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@reusedproducts.qtwvoiy.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,12 +26,14 @@ async function run() {
 
     const usersCollections = client.db("reusedProducts").collection("users");
 
+    // Get all the prodcuts category
     app.get("/category", async (req, res) => {
       const query = {};
       const result = await categoryCollections.find(query).toArray();
       res.send(result);
     });
 
+    // Get specific prodcuts for specific id
     app.get("/category/:id", async (req, res) => {
       const id = req.params.id;
       const query = { category_id: id };
@@ -40,18 +41,21 @@ async function run() {
       res.send(result);
     });
 
+    // Saved user email and name into database
     app.post("/users", async (req, res) => {
       const user = req.body;
       const result = await usersCollections.insertOne(user);
       res.send(result);
     });
 
+    // Get all the seller details
     app.get("/users/seller", async (req, res) => {
       const query = { role: "seller" };
       const result = await usersCollections.find(query).toArray();
       res.send(result);
     });
 
+    // Get all the buyer details
     app.get("/users/buyer", async (req, res) => {
       const query = { role: "buyer" };
       const result = await usersCollections.find(query).toArray();
