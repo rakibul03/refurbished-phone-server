@@ -61,6 +61,21 @@ async function run() {
       const result = await usersCollections.find(query).toArray();
       res.send(result);
     });
+
+    // Create an API endpoint for delete a buyer
+    app.delete("/users/buyer/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await usersCollections.deleteOne(query);
+      res.send(result);
+    });
+
+    app.delete("/users/seller/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await usersCollections.deleteOne(query);
+      res.send(result);
+    });
   } finally {
   }
 }
