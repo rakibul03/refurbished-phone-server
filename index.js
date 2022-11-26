@@ -100,6 +100,13 @@ async function run() {
       const result = await bookingCollections.insertOne(booking);
       res.send(result);
     });
+
+    app.get("/booking-products", async (req, res) => {
+      const email = req.query.email;
+      const query = { userEmail: email };
+      const result = await bookingCollections.find(query).toArray();
+      res.send(result);
+    });
   } finally {
   }
 }
