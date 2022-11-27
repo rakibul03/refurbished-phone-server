@@ -41,7 +41,8 @@ async function run() {
       const id = req.params.id;
       const query = {
         category_id: id,
-        isSold: false,
+        isPayed: false,
+        isAvailabe: true,
       };
       const result = await productsCollections.find(query).toArray();
       res.send(result);
@@ -146,7 +147,7 @@ async function run() {
 
     // api endpoint for ad post
     app.get("/ad", async (req, res) => {
-      const query = { showAd: true, isAvailabe: true };
+      const query = { showAd: true, isAvailabe: true, isPayed: false };
       const result = await productsCollections.find(query).toArray();
       res.send(result);
     });
