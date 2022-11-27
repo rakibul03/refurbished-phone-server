@@ -71,6 +71,19 @@ async function run() {
       res.send(result);
     });
 
+    // Check user role user admin or seller
+    app.get("/users/role/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const result = await usersCollections.findOne(query);
+      if (result?.role === "admin") {
+        res.send({ isAmdin: result?.role === "admin" });
+      }
+      if (result?.role === "seller") {
+        res.send({ isSeller: result?.role === "seller" });
+      }
+    });
+
     // Get all the seller details
     app.get("/users/seller", async (req, res) => {
       const query = { role: "seller" };
