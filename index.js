@@ -165,6 +165,7 @@ async function run() {
       res.send(result);
     });
 
+    // Endpoint for check products availability
     app.patch("/stock/:id", async (req, res) => {
       const id = req.params.id;
       const status = req.body;
