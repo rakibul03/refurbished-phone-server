@@ -77,7 +77,7 @@ async function run() {
       const query = { email };
       const result = await usersCollections.findOne(query);
       if (result?.role === "admin") {
-        res.send({ isAmdin: result?.role === "admin" });
+        res.send({ isAdmin: result?.role === "admin" });
       }
       if (result?.role === "seller") {
         res.send({ isSeller: result?.role === "seller" });
