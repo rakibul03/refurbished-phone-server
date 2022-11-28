@@ -214,6 +214,13 @@ async function run() {
       const result = await productsCollections.updateOne(query, updateDoc);
       res.send(result);
     });
+
+    app.delete("/reported-items/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productsCollections.deleteOne(query);
+      res.send(result);
+    });
   } finally {
   }
 }
