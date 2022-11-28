@@ -193,6 +193,27 @@ async function run() {
       const result = await productsCollections.updateOne(query, updateDoc);
       res.send(result);
     });
+
+    // Get report products
+    app.get("/reported-items", async (req, res) => {
+      const query = { isReported: true };
+      const result = await productsCollections.find(query).toArray();
+      res.send(result);
+    });
+
+    // Get report products
+    app.patch("/reported-items/:id", async (req, res) => {
+      const id = req.params.id;
+      const report = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          isReported: report.report,
+        },
+      };
+      const result = await productsCollections.updateOne(query, updateDoc);
+      res.send(result);
+    });
   } finally {
   }
 }
